@@ -76,4 +76,24 @@ describe('detect', function () {
 
     });
 
+    describe('cjs', function () {
+
+        it('should detect `cjs` for fixtures/cjs.js', function () {
+            expect(detect(fixtures + 'cjs.js')).to.be.equal('cjs');
+        });
+
+        it('should detect `cjs` for fixtures/cjs-require.js', function () {
+            expect(detect(fixtures + 'cjs-require.js')).to.be.equal('cjs');
+        });
+
+        it('should detect `cjs` for fixtures/cjs-exports.js', function () {
+            expect(detect(fixtures + 'cjs.js')).to.be.equal('cjs');
+        });
+
+        it('should detect `cjs` for fixtures/cjs-module-exports.js', function () {
+            expect(detect(fixtures + 'cjs.js')).to.be.equal('cjs');
+        });
+
+    });
+
 });

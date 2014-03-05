@@ -27,12 +27,20 @@ $ npm install js-module-formats
 Usage
 -----
 
-Detect the module format of a file called `file.js`:
+By calling `detect()` with a filesystem path, it returns one of the following values:
+
+* `yui` Modules
+* `amd` Modules
+* `cjs` CommonJS modules (including nodejs modules)
+* `es` Modules
+* `undefined` if the detection fails
+
+To detect the module format of a file called `file.js`:
 
 ```javascript
 var detect = require('js-module-formats').detect,
 
-console.log(detect(__dirname + '/file.js')); // output: `amd` or `yui` or `es` or `undefined`
+console.log(detect(__dirname + '/file.js'));
 ```
 
 **Note:** ES modules without `import` or `export` statements will not be detected.
