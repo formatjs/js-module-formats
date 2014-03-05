@@ -77,7 +77,7 @@ AMD or ES module.
 **/
 function detect(file) {
     var mod = extract(file);
-    if (mod instanceof Array) {
+    if (Array.isArray(mod)) {
         mod = mod.shift(); // picking up the first module from the list
     }
     return mod && mod.type;
