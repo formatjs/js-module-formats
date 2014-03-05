@@ -1,0 +1,39 @@
+{
+  "name": "js-module-formats",
+  "version": "0.0.1",
+  "description": "Detect different types of javascript modules formats",
+  "homepage": "https://github.com/yahoo/js-module-formats",
+  "main": "index",
+  "keywords": [
+    "javascript",
+    "module",
+    "es6",
+    "amd",
+    "yui",
+    "cjs"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/yahoo/js-module-formats.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/yahoo/js-module-formats/issues"
+  },
+  "devDependencies": {
+    "chai": "*",
+    "istanbul": "*",
+    "mocha": "*",
+    "mockery": "*",
+    "xunit-file": "*"
+  },
+  "scripts": {
+    "test": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec"
+  },
+  "author": {
+    "name": "Caridy Patino",
+    "email": "caridy@gmail.com",
+    "url": "http://caridy.name/"
+  },
+  "license": "BSD"
+}
