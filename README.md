@@ -27,10 +27,7 @@ $ npm install js-module-formats
 Usage
 -----
 
-### Detecting Module Format
-
-To use Express State with an Express app, the app must first be extended. Use
-the `extend()` method that Express State exports:
+Detect the module format of a file called `file.js`:
 
 ```javascript
 var detect = require('js-module-formats').detect,
