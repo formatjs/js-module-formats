@@ -86,6 +86,10 @@ describe('detect', function () {
             expect(detect(fixtures + 'cjs-require.js')).to.be.equal('cjs');
         });
 
+        it('should detect `cjs` for fixtures/cjs-instance.js', function () {
+            expect(detect(fixtures + 'cjs-instance.js')).to.be.equal('cjs');
+        });
+
         it('should detect `cjs` for fixtures/cjs-exports.js', function () {
             expect(detect(fixtures + 'cjs.js')).to.be.equal('cjs');
         });

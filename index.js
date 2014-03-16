@@ -75,7 +75,7 @@ function extract(file) {
         throw new Error('Common JS script detected');
     };
     context.module = {
-        exports: {}
+        exports: Object.create(null)
     };
     context.exports = context.module.exports;
 
@@ -94,8 +94,10 @@ function extract(file) {
         // very dummy detection process for CommonJS modules
         if (typeof context.module.exports === 'function'
             || typeof context.exports === 'function'
-            || Object.keys(context.module.exports) > 0
-            || Object.keys(context.exports) > 0) {
+            || Object.keys(context.module.exports).length > 0
+            || Object.keys(context.exports).length > 0
+            || context.module.exports.__proto__
+            || context.exports.__proto__) {
             mods.push({type: 'cjs'});
         }
     }
