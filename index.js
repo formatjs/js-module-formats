@@ -22,7 +22,7 @@ Analyze JavaScript source, collecting the module or modules information when pos
 
 @method extract
 @default
-@param {string} src The javascript source to be analyzed
+@param {string} src The JavaScript source to be analyzed
 @return {object|array} an object or a collection of object with the info gathered
     from the analysis, it usually includes objects with `type` and `name` per module.
 **/
@@ -109,7 +109,7 @@ Analyze JavaScript source, detecting if the file is a YUI, AMD or ES module.
 
 @method detect
 @default
-@param {string} src The javascript source to be analyzed
+@param {string} src The JavaScript source to be analyzed
 @return {string} `yui` or `amd` or `es`
 **/
 function detect(src) {

@@ -29,7 +29,7 @@ describe('detect', function () {
             expect(detect(fixtures['missing.js'])).to.be.equal(undefined);
         });
 
-        it('should return `undefined` for non javascript source', function () {
+        it('should return `undefined` for non JavaScript source', function () {
             expect(detect(fixtures['weird.txt'])).to.be.equal(undefined);
         });
 

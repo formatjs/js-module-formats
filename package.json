@@ -1,11 +1,11 @@
 {
   "name": "js-module-formats",
   "version": "0.0.2",
-  "description": "Detect different types of javascript modules formats",
+  "description": "Detect different types of JavaScript modules formats",
   "homepage": "https://github.com/yahoo/js-module-formats",
   "main": "index",
   "keywords": [
-    "javascript",
+    "JavaScript",
     "module",
     "es6",
     "amd",
