@@ -46,6 +46,10 @@ describe('detect', function () {
             expect(detect(fixtures + 'es.js')).to.be.equal('es');
         });
 
+        it('should detect `es` for fixtures/es-module-import.js', function () {
+            expect(detect(fixtures + 'es-module-import.js')).to.be.equal('es');
+        });
+
     });
 
     describe('amd', function () {

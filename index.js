@@ -12,6 +12,12 @@ var libfs = require('fs'),
     vm = require('vm'),
     context = vm.createContext({});
 
+// RegExp to detect ES6 modules
+// cortesy of https://github.com/ModuleLoader/es6-module-loader
+// comprehensively overclassifying regex detectection for es6 module syntax
+var ES6ImportExportRegExp = /(?:^\s*|[}{\(\);,\n]\s*)(import\s+['"]|(import|module)\s+[^"'\(\)\n;]+\s+from\s+['"]|export\s+(\*|\{|default|function|var|const|let|[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*))/,
+    ES6AliasRegExp = /^\s*export\s*\*\s*from\s*(?:'([^']+)'|"([^"]+)")/;
+
 module.exports = {
     detect: detect,
     extract: extract
@@ -27,7 +33,8 @@ Analyze a javascript file, collecting the module or modules information when pos
     from the analysis, it usually includes objects with `type` and `name` per module.
 **/
 function extract(file) {
-    var mods = [];
+    var mods = [],
+        src;
 
     /**
     YUI detection is based on a simple rule:
@@ -83,11 +90,12 @@ function extract(file) {
     // executing the content of the file into a new context to avoid leaking
     // globals during the detection process.
     try {
-        vm.runInContext(libfs.readFileSync(file, 'utf8'), context, file);
+        src = libfs.readFileSync(file, 'utf8');
+        vm.runInContext(src, context, file);
     } catch (e) {
         // console.log(e.stack || e);
-        // very dummy detection process for ES modules
-        if (e.toString() === 'SyntaxError: Unexpected reserved word') {
+        // detection process for ES modules
+        if (ES6ImportExportRegExp.test(src) || ES6AliasRegExp.test(src)) {
             mods.push({type: 'es'});
         }
     } finally {
