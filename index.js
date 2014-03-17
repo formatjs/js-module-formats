@@ -96,8 +96,8 @@ function extract(src) {
             || typeof context.exports === 'function'
             || Object.keys(context.module.exports).length > 0
             || Object.keys(context.exports).length > 0
-            || context.module.exports.__proto__
-            || context.exports.__proto__) {
+            || Object.getPrototypeOf(context.module.exports)
+            || Object.getPrototypeOf(context.exports)) {
             mods.push({type: 'cjs'});
         }
     }
