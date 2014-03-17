@@ -41,72 +41,52 @@ describe('detect', function () {
 
     describe('yui', function () {
 
-        it('should detect `yui` for fixtures/yui-foo.js', function () {
-            expect(detect(fixtures['yui-foo.js'])).to.be.equal('yui');
-        });
-
-        it('should detect `yui` for fixtures/yui-foo-es6-transpiled.js', function () {
-            expect(detect(fixtures['yui-foo-es6-transpiled.js'])).to.be.equal('yui');
+        // iterating over the fixtures for all yui*.js
+        Object.keys(fixtures).forEach(function (file) {
+            if (file.indexOf('yui') === 0) {
+                it('should detect `yui` for fixtures/' + file, function () {
+                    expect(detect(fixtures[file])).to.be.equal('yui');
+                });
+            }
         });
 
     });
 
     describe('ES', function () {
 
-        it('should detect `es` for fixtures/es.js', function () {
-            expect(detect(fixtures['es.js'])).to.be.equal('es');
+        // iterating over the fixtures for all es*.js
+        Object.keys(fixtures).forEach(function (file) {
+            if (file.indexOf('es') === 0) {
+                it('should detect `es` for fixtures/' + file, function () {
+                    expect(detect(fixtures[file])).to.be.equal('es');
+                });
+            }
         });
 
     });
 
     describe('amd', function () {
 
-        it('should detect `amd` for fixtures/amd-foo.js', function () {
-            expect(detect(fixtures['amd-foo.js'])).to.be.equal('amd');
-        });
-
-        it('should detect `amd` for fixtures/amd-foo-es6-transpiled.js', function () {
-            expect(detect(fixtures['amd-foo-es6-transpiled.js'])).to.be.equal('amd');
-        });
-
-        it('should detect `amd` for fixtures/amd-foo-with-deps.js', function () {
-            expect(detect(fixtures['amd-foo-with-deps.js'])).to.be.equal('amd');
-        });
-
-        it('should detect `amd` for fixtures/amd-anonymous-object.js', function () {
-            expect(detect(fixtures['amd-anonymous-object.js'])).to.be.equal('amd');
-        });
-
-        it('should detect `amd` for fixtures/amd-anonymous-factory.js', function () {
-            expect(detect(fixtures['amd-anonymous-factory.js'])).to.be.equal('amd');
-        });
-
-        it('should detect `amd` for fixtures/amd-anonymous-factory-with-deps.js', function () {
-            expect(detect(fixtures['amd-anonymous-factory-with-deps.js'])).to.be.equal('amd');
+        // iterating over the fixtures for all amd*.js
+        Object.keys(fixtures).forEach(function (file) {
+            if (file.indexOf('amd') === 0) {
+                it('should detect `amd` for fixtures/' + file, function () {
+                    expect(detect(fixtures[file])).to.be.equal('amd');
+                });
+            }
         });
 
     });
 
     describe('cjs', function () {
 
-        it('should detect `cjs` for fixtures/cjs.js', function () {
-            expect(detect(fixtures['cjs.js'])).to.be.equal('cjs');
-        });
-
-        it('should detect `cjs` for fixtures/cjs-require.js', function () {
-            expect(detect(fixtures['cjs-require.js'])).to.be.equal('cjs');
-        });
-
-        it('should detect `cjs` for fixtures/cjs-instance.js', function () {
-            expect(detect(fixtures['cjs-instance.js'])).to.be.equal('cjs');
-        });
-
-        it('should detect `cjs` for fixtures/cjs-exports.js', function () {
-            expect(detect(fixtures['cjs-exports.js'])).to.be.equal('cjs');
-        });
-
-        it('should detect `cjs` for fixtures/cjs-module-exports.js', function () {
-            expect(detect(fixtures['cjs-module-exports.js'])).to.be.equal('cjs');
+        // iterating over the fixtures for all cjs*.js
+        Object.keys(fixtures).forEach(function (file) {
+            if (file.indexOf('cjs') === 0) {
+                it('should detect `cjs` for fixtures/' + file, function () {
+                    expect(detect(fixtures[file])).to.be.equal('cjs');
+                });
+            }
         });
 
     });
