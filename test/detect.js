@@ -98,15 +98,15 @@ describe('detect', function () {
         });
 
         it('should detect `cjs` for fixtures/cjs-instance.js', function () {
-            expect(detect(fixtures + 'cjs-instance.js')).to.be.equal('cjs');
+            expect(detect(fixtures['cjs-instance.js'])).to.be.equal('cjs');
         });
 
         it('should detect `cjs` for fixtures/cjs-exports.js', function () {
-            expect(detect(fixtures['cjs.js'])).to.be.equal('cjs');
+            expect(detect(fixtures['cjs-exports.js'])).to.be.equal('cjs');
         });
 
         it('should detect `cjs` for fixtures/cjs-module-exports.js', function () {
-            expect(detect(fixtures['cjs.js'])).to.be.equal('cjs');
+            expect(detect(fixtures['cjs-module-exports.js'])).to.be.equal('cjs');
         });
 
     });
