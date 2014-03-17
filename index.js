@@ -12,6 +12,12 @@ var libfs = require('fs'),
     vm = require('vm'),
     context = vm.createContext({});
 
+// RegExp to detect ES6 modules
+// cortesy of https://github.com/ModuleLoader/es6-module-loader
+// comprehensively overclassifying regex detectection for es6 module syntax
+var ES6ImportExportRegExp = /(?:^\s*|[}{\(\);,\n]\s*)(import\s+['"]|(import|module)\s+[^"'\(\)\n;]+\s+from\s+['"]|export\s+(\*|\{|default|function|var|const|let|[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*))/,
+    ES6AliasRegExp = /(?:^\s*|[}{\(\);,\n]\s*)(export\s*\*\s*from\s*(?:'([^']+)'|"([^"]+)"))/;
+
 module.exports = {
     detect: detect,
     extract: extract
@@ -86,8 +92,8 @@ function extract(src) {
         vm.runInContext(src, context);
     } catch (e) {
         // console.log(e.stack || e);
-        // very dummy detection process for ES modules
-        if (e.toString() === 'SyntaxError: Unexpected reserved word') {
+        // detection process for ES modules
+        if (ES6ImportExportRegExp.test(src) || ES6AliasRegExp.test(src)) {
             mods.push({type: 'es'});
         }
     } finally {
