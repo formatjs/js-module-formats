@@ -98,12 +98,12 @@ function extract(src) {
         }
     } finally {
         // very dummy detection process for CommonJS modules
-        if (typeof context.module.exports === 'function'
-            || typeof context.exports === 'function'
-            || Object.keys(context.module.exports).length > 0
-            || Object.keys(context.exports).length > 0
-            || Object.getPrototypeOf(context.module.exports)
-            || Object.getPrototypeOf(context.exports)) {
+        if (typeof context.module.exports === 'function' ||
+                typeof context.exports === 'function' ||
+                Object.keys(context.module.exports).length > 0 ||
+                Object.keys(context.exports).length > 0 ||
+                Object.getPrototypeOf(context.module.exports) ||
+                Object.getPrototypeOf(context.exports)) {
             mods.push({type: 'cjs'});
         }
     }

@@ -1,6 +1,6 @@
 {
   "name": "js-module-formats",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Detect different types of JavaScript modules formats",
   "homepage": "https://github.com/yahoo/js-module-formats",
   "main": "index",
@@ -25,9 +25,12 @@
     "mocha": "*",
     "mockery": "*",
     "xunit-file": "*",
-    "glob": "^3.2.9"
+    "glob": "^3.2.9",
+    "jshint": "^2.4.4"
   },
   "scripts": {
+    "lint": "./node_modules/.bin/jshint index.js",
+    "pretest": "./node_modules/.bin/jshint index.js",
     "test": "./node_modules/istanbul/lib/cli.js cover -- ./node_modules/.bin/_mocha test/*.js --reporter spec"
   },
   "author": {
