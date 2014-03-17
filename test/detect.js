@@ -57,7 +57,7 @@ describe('detect', function () {
         // iterating over the fixtures for all es*.js
         Object.keys(fixtures).forEach(function (file) {
             if (file.indexOf('es') === 0) {
-                it('should detect `yui` for fixtures/' + file, function () {
+                it('should detect `es` for fixtures/' + file, function () {
                     expect(detect(fixtures[file])).to.be.equal('es');
                 });
             }
@@ -70,7 +70,7 @@ describe('detect', function () {
         // iterating over the fixtures for all amd*.js
         Object.keys(fixtures).forEach(function (file) {
             if (file.indexOf('amd') === 0) {
-                it('should detect `yui` for fixtures/' + file, function () {
+                it('should detect `amd` for fixtures/' + file, function () {
                     expect(detect(fixtures[file])).to.be.equal('amd');
                 });
             }
@@ -83,7 +83,7 @@ describe('detect', function () {
         // iterating over the fixtures for all cjs*.js
         Object.keys(fixtures).forEach(function (file) {
             if (file.indexOf('cjs') === 0) {
-                it('should detect `yui` for fixtures/' + file, function () {
+                it('should detect `cjs` for fixtures/' + file, function () {
                     expect(detect(fixtures[file])).to.be.equal('cjs');
                 });
             }
