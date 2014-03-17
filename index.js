@@ -14,19 +14,20 @@ var libfs = require('fs'),
 
 module.exports = {
     detect: detect,
+    detectFile: detectFile,
     extract: extract
 };
 
 /**
-Analyze a javascript file, collecting the module or modules information when possible.
+Analyze JavaScript source, collecting the module or modules information when possible.
 
 @method extract
 @default
-@param {string} file The filesystem path for the javascript to be analyzed
+@param {string} src The javascript source to be analyzed
 @return {object|array} an object or a collection of object with the info gathered
     from the analysis, it usually includes objects with `type` and `name` per module.
 **/
-function extract(file) {
+function extract(src) {
     var mods = [];
 
     /**
@@ -80,10 +81,10 @@ function extract(file) {
     context.exports = context.module.exports;
 
 
-    // executing the content of the file into a new context to avoid leaking
+    // executing the JavaScript source into a new context to avoid leaking
     // globals during the detection process.
     try {
-        vm.runInContext(libfs.readFileSync(file, 'utf8'), context, file);
+        vm.runInContext(src, context);
     } catch (e) {
         // console.log(e.stack || e);
         // very dummy detection process for ES modules
@@ -99,23 +100,38 @@ function extract(file) {
             mods.push({type: 'cjs'});
         }
     }
-    // returning an array when more than one module is defined in the file
+
+    // returning an array when more than one module is defined in the source
     return mods.length > 1 ? mods : mods[0];
+}
+
+/**
+Analyze JavaScript source, detecting if the file is a YUI, AMD or ES module.
+
+@method detect
+@default
+@param {string} src The javascript source to be analyzed
+@return {string} `yui` or `amd` or `es`
+**/
+function detect(src) {
+    var mod = extract(src);
+    if (Array.isArray(mod)) {
+        mod = mod.shift(); // picking up the first module from the list
+    }
+    return mod && mod.type;
 }
 
 /**
 Analyze a javascript file, detecting if the file is a YUI,
 AMD or ES module.
 
-@method detect
+@method detectFile
 @default
 @param {string} file The filesystem path for the javascript to be analyzed
 @return {string} `yui` or `amd` or `es`
 **/
-function detect(file) {
-    var mod = extract(file);
-    if (Array.isArray(mod)) {
-        mod = mod.shift(); // picking up the first module from the list
-    }
-    return mod && mod.type;
+function detectFile(file) {
+    try {
+        return detect(libfs.readFileSync(file, 'utf8'));
+    } catch (e) {}
 }
