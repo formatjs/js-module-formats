@@ -24,17 +24,16 @@ module.exports = {
 };
 
 /**
-Analyze a javascript file, collecting the module or modules information when possible.
+Analyze JavaScript source, collecting the module or modules information when possible.
 
 @method extract
 @default
-@param {string} file The filesystem path for the javascript to be analyzed
+@param {string} src The JavaScript source to be analyzed
 @return {object|array} an object or a collection of object with the info gathered
     from the analysis, it usually includes objects with `type` and `name` per module.
 **/
-function extract(file) {
-    var mods = [],
-        src;
+function extract(src) {
+    var mods = [];
 
     /**
     YUI detection is based on a simple rule:
@@ -87,11 +86,10 @@ function extract(file) {
     context.exports = context.module.exports;
 
 
-    // executing the content of the file into a new context to avoid leaking
+    // executing the JavaScript source into a new context to avoid leaking
     // globals during the detection process.
     try {
-        src = libfs.readFileSync(file, 'utf8');
-        vm.runInContext(src, context, file);
+        vm.runInContext(src, context);
     } catch (e) {
         // console.log(e.stack || e);
         // detection process for ES modules
@@ -104,26 +102,26 @@ function extract(file) {
             || typeof context.exports === 'function'
             || Object.keys(context.module.exports).length > 0
             || Object.keys(context.exports).length > 0
-            || context.module.exports.__proto__
-            || context.exports.__proto__) {
+            || Object.getPrototypeOf(context.module.exports)
+            || Object.getPrototypeOf(context.exports)) {
             mods.push({type: 'cjs'});
         }
     }
-    // returning an array when more than one module is defined in the file
+
+    // returning an array when more than one module is defined in the source
     return mods.length > 1 ? mods : mods[0];
 }
 
 /**
-Analyze a javascript file, detecting if the file is a YUI,
-AMD or ES module.
+Analyze JavaScript source, detecting if the file is a YUI, AMD or ES module.
 
 @method detect
 @default
-@param {string} file The filesystem path for the javascript to be analyzed
+@param {string} src The JavaScript source to be analyzed
 @return {string} `yui` or `amd` or `es`
 **/
-function detect(file) {
-    var mod = extract(file);
+function detect(src) {
+    var mod = extract(src);
     if (Array.isArray(mod)) {
         mod = mod.shift(); // picking up the first module from the list
     }
