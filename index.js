@@ -16,7 +16,7 @@ var libfs = require('fs'),
 // cortesy of https://github.com/ModuleLoader/es6-module-loader
 // comprehensively overclassifying regex detectection for es6 module syntax
 var ES6ImportExportRegExp = /(?:^\s*|[}{\(\);,\n]\s*)(import\s+['"]|(import|module)\s+[^"'\(\)\n;]+\s+from\s+['"]|export\s+(\*|\{|default|function|var|const|let|[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*))/,
-    ES6AliasRegExp = /^\s*export\s*\*\s*from\s*(?:'([^']+)'|"([^"]+)")/;
+    ES6AliasRegExp = /(?:^\s*|[}{\(\);,\n]\s*)(export\s*\*\s*from\s*(?:'([^']+)'|"([^"]+)"))/;
 
 module.exports = {
     detect: detect,
