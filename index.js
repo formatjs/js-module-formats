@@ -14,7 +14,6 @@ var libfs = require('fs'),
 
 module.exports = {
     detect: detect,
-    detectFile: detectFile,
     extract: extract
 };
 
@@ -119,19 +118,4 @@ function detect(src) {
         mod = mod.shift(); // picking up the first module from the list
     }
     return mod && mod.type;
-}
-
-/**
-Analyze a javascript file, detecting if the file is a YUI,
-AMD or ES module.
-
-@method detectFile
-@default
-@param {string} file The filesystem path for the javascript to be analyzed
-@return {string} `yui` or `amd` or `es`
-**/
-function detectFile(file) {
-    try {
-        return detect(libfs.readFileSync(file, 'utf8'));
-    } catch (e) {}
 }
