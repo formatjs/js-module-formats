@@ -80,10 +80,8 @@ function extract(src) {
         });
         throw new Error('Common JS script detected');
     };
-    context.module = {
-        exports: Object.create(null)
-    };
-    context.exports = context.module.exports;
+    context.exports = Object.create(null);
+    context.module = context;
 
 
     // executing the JavaScript source into a new context to avoid leaking
@@ -98,15 +96,10 @@ function extract(src) {
         }
     } finally {
         // very dummy detection process for CommonJS modules
-        if (typeof context.module.exports === 'function' ||
-                typeof context.module.exports === 'string' ||
-                typeof context.module.exports === 'number' ||
-                typeof context.exports === 'function' ||
+        if (typeof context.exports === 'function' ||
                 typeof context.exports === 'string' ||
                 typeof context.exports === 'number' ||
-                Object.keys(context.module.exports).length > 0 ||
                 Object.keys(context.exports).length > 0 ||
-                Object.getPrototypeOf(context.module.exports) ||
                 Object.getPrototypeOf(context.exports)) {
             mods.push({type: 'cjs'});
         }
