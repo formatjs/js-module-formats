@@ -1,6 +1,11 @@
 Javascript Module Formats Change History
 ========================================
 
+0.1.1 (2014-03-31)
+------------------
+
+* [PR #10] improving detection for cjs to support exporting `string`, `number`, etc.
+
 0.1.0 (2014-03-17)
 ------------------
 

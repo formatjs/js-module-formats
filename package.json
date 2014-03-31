@@ -1,6 +1,6 @@
 {
   "name": "js-module-formats",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Detect different types of JavaScript modules formats",
   "homepage": "https://github.com/yahoo/js-module-formats",
   "main": "index",
