@@ -1,6 +1,11 @@
 Javascript Module Formats Change History
 ========================================
 
+0.1.2 (2014-04-21)
+------------------
+
+* [PR #11] adding support for `steal` format.
+
 0.1.1 (2014-03-31)
 ------------------
 
