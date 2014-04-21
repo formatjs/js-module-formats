@@ -91,4 +91,18 @@ describe('detect', function () {
 
     });
 
+
+    describe('steal', function () {
+
+        // iterating over the fixtures for all steal*.js
+        Object.keys(fixtures).forEach(function (file) {
+            if (file.indexOf('steal') === 0) {
+                it('should detect `steal` for fixtures/' + file, function () {
+                    expect(detect(fixtures[file])).to.be.equal('steal');
+                });
+            }
+        });
+
+    });
+
 });

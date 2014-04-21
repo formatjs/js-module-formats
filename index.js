@@ -55,15 +55,21 @@ function extract(src) {
     AMD detection is based on a simple rule:
     - if `define()` is called
     **/
-    context.define = function (name, fn, version, config) {
+    context.define = function () {
         mods.push({
-            type: 'amd',
-            name: name,
-            version: version,
-            config: config
+            type: 'amd'
         });
     };
 
+    /**
+    Steal detection is based on a simple rule:
+    - if `steal()` is called
+    **/
+    context.steal = function () {
+        mods.push({
+            type: 'steal'
+        });
+    };
 
     /**
     CommonJS detection is based on simple rules:
